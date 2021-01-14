@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="LAST-MODIFIED" CONTENT="Tue Jan 22 15:04:57 2002 GMT">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="Public">
+<META NAME="GENERATOR" CONTENT="SGML-Tools 1.0.9">
+ 
+<TITLE> Программа управления компиляцией GNU make 3.73 </TITLE>
+<META NAME="DESCRIPTION" CONTENT="Next Previous Contents Программа управления компиляцией GNU make 3.73 Ричард Столлман (Richard M. Stallman) Роланд МакГрат (Roland McGrath) Апрель 1995">
+<META NAME="RESOURCE-TYPE" CONTENT="Document">
+<META NAME="DISTRIBUTION" CONTENT="global">
+<META NAME="ROBOTS" CONTENT="ALL">
+<META NAME="CHANGED" CONTENT="20020122;15045700">
+<META NAME="CHANGEDBY" CONTENT="Valentyn Solomko">
+ <LINK HREF="make-1.html" REL=next>
+</HEAD>
+<BODY>
+<A HREF="make-1.html">Next</A>
+Previous
+Contents
+<HR>
+<H1> Программа управления компиляцией GNU make 3.73 </H1>
+
+<H2>Ричард Столлман (Richard M. Stallman)   <BR>
+ Роланд МакГрат (Roland McGrath) </H2> Апрель 1995    Редакция 0.48 
+<P><HR>
+<EM>      Утилита make  автоматически   определяет,   какие   части   большой  программы должны быть перекомпилированы и команды для их перекомпиляции,  Это руководство описывает GNU  make,  который  был  реализован  Ричардом  Столлманом  и  Роландом  МакГратом.</EM>
+<HR>
+<P>
+<H2><A NAME="toc1">1.</A> <A HREF="make-1.html">Обзор make </A></H2>
+
+<UL>
+<LI><A HREF="make-1.html#ss1.1">1.1 Как читать это руководство </A>
+<LI><A HREF="make-1.html#ss1.2">1.2 Проблемы и ошибки </A>
+</UL>
+<P>
+<H2><A NAME="toc2">2.</A> <A HREF="make-2.html">Введение в make-файлы </A></H2>
+
+<UL>
+<LI><A HREF="make-2.html#ss2.1">2.1 На что похоже правило </A>
+<LI><A HREF="make-2.html#ss2.2">2.2 Простой make-файл </A>
+<LI><A HREF="make-2.html#ss2.3">2.3 Как make обрабатывает make-файл </A>
+<LI><A HREF="make-2.html#ss2.4">2.4 Переменные упрощают make-файл </A>
+<LI><A HREF="make-2.html#ss2.5">2.5 Возможность использования неявных команд </A>
+<LI><A HREF="make-2.html#ss2.6">2.6 Еще один стиль make-файла </A>
+<LI><A HREF="make-2.html#ss2.7">2.7 Правила для очистки каталога </A>
+</UL>
+<P>
+<H2><A NAME="toc3">3.</A> <A HREF="make-3.html">Написание make-файлов </A></H2>
+
+<UL>
+<LI><A HREF="make-3.html#ss3.1">3.1 Что содержат make-файлы </A>
+<LI><A HREF="make-3.html#ss3.2">3.2 Как назвать make-файл </A>
+<LI><A HREF="make-3.html#ss3.3">3.3 Включение других make-файлов </A>
+<LI><A HREF="make-3.html#ss3.4">3.4 Переменная MAKEFILES </A>
+<LI><A HREF="make-3.html#ss3.5">3.5 Как переделываются make-файлы </A>
+<LI><A HREF="make-3.html#ss3.6">3.6 Перекрытие части другого make-файла </A>
+</UL>
+<P>
+<H2><A NAME="toc4">4.</A> <A HREF="make-4.html">Написание правил </A></H2>
+
+<UL>
+<LI><A HREF="make-4.html#ss4.1">4.1 Синтаксис правила </A>
+<LI><A HREF="make-4.html#ss4.2">4.2 Использование шаблонных символов в именах файлов </A>
+<LI><A HREF="make-4.html#ss4.3">4.3 Поиск зависимостей по каталогам </A>
+<LI><A HREF="make-4.html#ss4.4">4.4 Цели-имена действий </A>
+<LI><A HREF="make-4.html#ss4.5">4.5 Правила без команд и зависимостей </A>
+<LI><A HREF="make-4.html#ss4.6">4.6 Пустые целевые файлы для фиксации событий </A>
+<LI><A HREF="make-4.html#ss4.7">4.7 Специальные встроенные имена целей </A>
+<LI><A HREF="make-4.html#ss4.8">4.8 Несколько целей в правиле </A>
+<LI><A HREF="make-4.html#ss4.9">4.9 Несколько правил для одной цели </A>
+<LI><A HREF="make-4.html#ss4.10">4.10 Статические шаблонные правила </A>
+<LI><A HREF="make-4.html#ss4.11">4.11 Правила с двумя двоеточиями </A>
+<LI><A HREF="make-4.html#ss4.12">4.12 Автоматическая генерация зависимостей </A>
+</UL>
+<P>
+<H2><A NAME="toc5">5.</A> <A HREF="make-5.html">Написание команд в правилах </A></H2>
+
+<UL>
+<LI><A HREF="make-5.html#ss5.1">5.1 Отображение команды </A>
+<LI><A HREF="make-5.html#ss5.2">5.2 Выполнение команд </A>
+<LI><A HREF="make-5.html#ss5.3">5.3 Параллельное выполнение </A>
+<LI><A HREF="make-5.html#ss5.4">5.4 Ошибки в командах </A>
+<LI><A HREF="make-5.html#ss5.5">5.5 Прерывание или уничтожение программы make </A>
+<LI><A HREF="make-5.html#ss5.6">5.6 Рекурсивное использование программы make </A>
+<LI><A HREF="make-5.html#ss5.7">5.7 Определение именованных командных последовательностей </A>
+<LI><A HREF="make-5.html#ss5.8">5.8 Использование пустых команд </A>
+</UL>
+<P>
+<H2><A NAME="toc6">6.</A> <A HREF="make-6.html">Как использовать переменные </A></H2>
+
+<UL>
+<LI><A HREF="make-6.html#ss6.1">6.1 Основы обращения к переменным </A>
+<LI><A HREF="make-6.html#ss6.2">6.2 Две разновидности переменных </A>
+<LI><A HREF="make-6.html#ss6.3">6.3 Дополнительные возможности для ссылки на переменные </A>
+<LI><A HREF="make-6.html#ss6.4">6.4 Как переменные получают свои значения </A>
+<LI><A HREF="make-6.html#ss6.5">6.5 Установка переменных </A>
+<LI><A HREF="make-6.html#ss6.6">6.6 Добавление дополнительного фрагмента к пеpеменным </A>
+<LI><A HREF="make-6.html#ss6.7">6.7 Директива override </A>
+<LI><A HREF="make-6.html#ss6.8">6.8 Определение многостроковых переменных </A>
+<LI><A HREF="make-6.html#ss6.9">6.9 Переменные из командной среды </A>
+</UL>
+<P>
+<H2><A NAME="toc7">7.</A> <A HREF="make-7.html">Условные части make-файла </A></H2>
+
+<UL>
+<LI><A HREF="make-7.html#ss7.1">7.1 Пример условной конструкции </A>
+<LI><A HREF="make-7.html#ss7.2">7.2 Синтаксис условных конструкций </A>
+<LI><A HREF="make-7.html#ss7.3">7.3 Условные конструкции, которые проверяют опции </A>
+</UL>
+<P>
+<H2><A NAME="toc8">8.</A> <A HREF="make-8.html">Функции преобразования текста </A></H2>
+
+<UL>
+<LI><A HREF="make-8.html#ss8.1">8.1 Синтаксис вызова функции </A>
+<LI><A HREF="make-8.html#ss8.2">8.2 Функции подстановки и анализа строк </A>
+<LI><A HREF="make-8.html#ss8.3">8.3 Функции для обработки имен файлов </A>
+<LI><A HREF="make-8.html#ss8.4">8.4 8.4 Функция foreach </A>
+<LI><A HREF="make-8.html#ss8.5">8.5 Функция origin </A>
+<LI><A HREF="make-8.html#ss8.6">8.6 Функция shell </A>
+</UL>
+<P>
+<H2><A NAME="toc9">9.</A> <A HREF="make-9.html">Как запускать make </A></H2>
+
+<UL>
+<LI><A HREF="make-9.html#ss9.1">9.1 Аргументы для определения make-файла </A>
+<LI><A HREF="make-9.html#ss9.2">9.2 Аргументы для определения главных целей </A>
+<LI><A HREF="make-9.html#ss9.3">9.3 Вместо исполнения команд </A>
+<LI><A HREF="make-9.html#ss9.4">9.4 Предотвращение перекомпиляции некоторых файлов </A>
+<LI><A HREF="make-9.html#ss9.5">9.5 Перекрывающиеся переменные </A>
+<LI><A HREF="make-9.html#ss9.6">9.6 Проверка компиляции программ </A>
+<LI><A HREF="make-9.html#ss9.7">9.7 Обзор опций </A>
+</UL>
+<P>
+<H2><A NAME="toc10">10.</A> <A HREF="make-10.html">Использование неявных правил </A></H2>
+
+<UL>
+<LI><A HREF="make-10.html#ss10.1">10.1 Использование неявных правил </A>
+<LI><A HREF="make-10.html#ss10.2">10.2 Перечень неявных правил </A>
+<LI><A HREF="make-10.html#ss10.3">10.3 Переменные, используемые неявными правилами </A>
+<LI><A HREF="make-10.html#ss10.4">10.4 Цепочки неявных правил </A>
+<LI><A HREF="make-10.html#ss10.5">10.5 Определение и переопределение шаблонных правил </A>
+<LI><A HREF="make-10.html#ss10.6">10.6 Определение правил последней возможности, используемых        по умолчанию </A>
+<LI><A HREF="make-10.html#ss10.7">10.7 Устаревшие суффиксные правила </A>
+<LI><A HREF="make-10.html#ss10.8">10.8 Алгоритм поиска неявного правила </A>
+</UL>
+<P>
+<H2><A NAME="toc11">11.</A> <A HREF="make-11.html">Использование make для обновления архивных файлов </A></H2>
+
+<UL>
+<LI><A HREF="make-11.html#ss11.1">11.1 Элементы архивов в качестве целей </A>
+<LI><A HREF="make-11.html#ss11.2">11.2 Неявные правила для целей, являющихся элементами архивов </A>
+<LI><A HREF="make-11.html#ss11.3">11.3 Опасности при использовании архивов </A>
+<LI><A HREF="make-11.html#ss11.4">11.4 Суффиксные правила для архивных файлов </A>
+</UL>
+<P>
+<H2><A NAME="toc12">12.</A> <A HREF="make-12.html">Особенности GNU-версии программы make </A></H2>
+
+<P>
+<H2><A NAME="toc13">13.</A> <A HREF="make-13.html">Несовместимость и недостающие возможности </A></H2>
+
+<P>
+<H2><A NAME="toc14">14.</A> <A HREF="make-14.html">Соглашения о make-файлах </A></H2>
+
+<UL>
+<LI><A HREF="make-14.html#ss14.1">14.1 Общие соглашения о make-файлах </A>
+<LI><A HREF="make-14.html#ss14.2">14.2 Использование утилит в Makefile. </A>
+<LI><A HREF="make-14.html#ss14.3">14.3 Стандартные цели в Make </A>
+<LI><A HREF="make-14.html#ss14.4">14.4 Переменные для указания команд. </A>
+<LI><A HREF="make-14.html#ss14.5">14.5 Переменные для каталогов </A>
+</UL>
+<P>
+<H2><A NAME="toc15">15.</A> <A HREF="make-15.html">Приложение. Комплексный пример Make-файла. </A></H2>
+
+<HR>
+<A HREF="make-1.html">Next</A>
+Previous
+Contents
+</BODY>
+</HTML>
